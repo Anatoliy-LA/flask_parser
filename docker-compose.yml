@@ -16,8 +16,14 @@ services:
             context: .
             dockerfile: celery.Dockerfile
         depends_on:
-            - redis
+            - rabbitmq
 
-    redis:
-        image: redis:alpine
-        command: --port 6380
+    # redis:
+    #     image: redis:alpine
+    #     command: --port 6380
+
+    rabbitmq:
+        container_name: 'rabbitmq'
+        image: rabbitmq:3.8.16-alpine
+        ports:
+            - "5672:5672"

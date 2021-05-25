@@ -2,11 +2,11 @@ import requests
 from bs4 import BeautifulSoup
 from celery import Celery
 from collections import defaultdict
-from conf import redis_address
+from conf import broker, backend
 import time
 
 
-celery_app = Celery("celery", backend=redis_address, broker=redis_address)
+celery_app = Celery("celery", broker=broker, backend=backend)
 
 
 @celery_app.task
