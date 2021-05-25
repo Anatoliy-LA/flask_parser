@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+    flask:
+        container_name: flask
+        build:
+            context: .
+            dockerfile: flask.Dockerfile
+        ports:
+            - "5000:5000"
+        depends_on:
+            - worker
+
+    worker:
+        container_name: celery_worker
+        build:
+            context: .
+            dockerfile: celery.Dockerfile
+        depends_on:
+            - redis
+
+    redis:
+        image: redis:alpine
+        command: --port 6380
